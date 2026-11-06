@@ -19,7 +19,7 @@ x-backend-defaults: &backend_defaults
 services:
   configurator:
     <<: *backend_defaults
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     entrypoint:
       - bash
       - -c
@@ -45,7 +45,7 @@ services:
 
   backend:
     <<: *backend_defaults
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     environment:
       GUNICORN_THREADS: ${GUNICORN_THREADS:-4}
       GUNICORN_WORKERS: ${GUNICORN_WORKERS:-2}
@@ -53,7 +53,7 @@ services:
 
   frontend:
     <<: *customizable_image
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     command:
       - nginx-entrypoint.sh
     environment:
@@ -74,7 +74,7 @@ services:
 
   websocket:
     <<: [*depends_on_configurator, *customizable_image]
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     command:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
@@ -83,17 +83,17 @@ services:
 
   queue-short:
     <<: *backend_defaults
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     command: bench worker --queue short,default
 
   queue-long:
     <<: *backend_defaults
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     command: bench worker --queue long,default,short
 
   scheduler:
     <<: *backend_defaults
-    platform: linux/arm64
+    platform: ${PLATFORM_ARCH}
     command: bench schedule
 
 # ERPNext requires local assets access (Frappe does not)
