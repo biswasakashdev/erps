@@ -19,3 +19,12 @@ run:
 	docker compose -f compose.prod.yaml up -d
 down:
 	docker compose -f compose.prod.yaml down
+
+site-config:
+	docker compose exec backend bench new-site localhost \
+		--mariadb-root-password 123 \
+		--admin-password admin
+
+install-app:
+	docker compose exec backend bench --site localhost install-app erpnext
+
