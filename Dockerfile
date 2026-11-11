@@ -58,24 +58,6 @@ COPY resources/start.sh /usr/local/bin/start.sh
 RUN chmod 755 /usr/local/bin/start.sh
 
 USER frappe
-
-
-COPY hooks.py  /home/frappe/frappe-bench/apps/erpnext/erpnext/hooks.py
-
-
-RUN rm /home/frappe/frappe-bench/assets/erpnext/images/erpnext-logo-blue.png
-RUN rm /home/frappe/frappe-bench/assets/erpnext/images/erpnext-logo.svg
-RUN rm /home/frappe/frappe-bench/assets/erpnext/images/erpnext-favicon.svg
-RUN rm /home/frappe/frappe-bench/assets/erpnext/images/erpnext-video-placeholder.jpg
-
-
-
-
-COPY --chown=frappe:frappe erp-logo.png /home/frappe/frappe-bench/assets/erpnext/images/erpnext-logo.png
-COPY --chown=frappe:frappe erp-logo.png /home/frappe/frappe-bench/assets/erpnext/images/erpnext-favicon.png
-COPY --chown=frappe:frappe erp-logo.png /home/frappe/frappe-bench/assets/erpnext/images/erpnext-logo.png
-COPY --chown=frappe:frappe erp-logo.png /home/frappe/frappe-bench/assets/erpnext/images/erpnext-logo-blue.png
-
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["start.sh"]
