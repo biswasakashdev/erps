@@ -2,7 +2,7 @@
 build:
 	docker build --no-cache \
 		--build-arg=FRAPPE_PATH=https://github.com/frappe/frappe \
- 		--build-arg=FRAPPE_BRANCH=version-16 \
+ 		--build-arg=FRAPPE_BRANCH=version-15 \
  		--secret=id=apps_json,src=apps.json \
 		--tag=painsantanu/sterling-erp:latest \
 		--file=Dockerfile .
